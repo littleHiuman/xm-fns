@@ -1,0 +1,26 @@
+{
+  "name": "xm-utils",
+  "version": "1.0.0",
+  "description": "a common functions utils, includes css, javascript ...",
+  "main": "main.js",
+  "scripts": {
+    "build": "rollup -c",
+    "test": "jest",
+    "style": "eslint main.js src/**/*.js",
+    "validate": "npm run build && npm run style && npm run test",
+    "genDocs": "node ./src/tools"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "MIT",
+  "private": true,
+  "devDependencies": {
+    "@babel/plugin-transform-modules-commonjs": "^7.16.0",
+    "eslint": "^7.16.0",
+    "eslint-plugin-import": "^2.26.0",
+    "jest": "^27.4.3",
+    "rewire": "^5.0.0",
+    "rollup-plugin-babel": "^4.4.0",
+    "rollup-plugin-terser": "^7.0.2"
+  }
+}
