@@ -1,8 +1,8 @@
 {
-  "name": "xm-tools",
+  "name": "xm-fns",
   "version": "1.0.0",
-  "description": "a common functions utils, includes css, javascript ...",
-  "main": "main.js",
+  "description": "一个常用功能的工具函数，包含css的、JavaScript的…… a common functions utils, includes css, javascript ...",
+  "main": "dist/main.js",
   "scripts": {
     "build": "rollup -c",
     "test": "jest",
@@ -11,9 +11,15 @@
     "genDocs": "node ./src/genDocs"
   },
   "keywords": [],
-  "author": "",
+  "author": "littleHiuman",
   "license": "MIT",
-  "private": true,
+  "files": [
+    "dist"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/littleHiuman/xm-fns.git"
+  },
   "devDependencies": {
     "@babel/plugin-transform-modules-commonjs": "^7.16.0",
     "eslint": "^7.16.0",
