@@ -269,6 +269,42 @@ export function getDateInfoNWeek(dd, day, showToday) {
   }
 }
 
+/**
+ * @name: debounce
+ * @description: 防抖
+ * @param {Function} fn
+ * @param {Number} delay
+ * @return {Function}
+ */
+function debounce(fn, delay) {
+  let timeout = null
+  return function(...args) {
+    clearTimeout(timeout)
+    timeout = setTimeout(() => {
+      fn.apply(this, args)
+    }, delay)
+  }
+}
+
+/**
+ * @name: throttle
+ * @description: 节流
+ * @param {Function} fn
+ * @param {Number} delay
+ * @return {Function}
+ */
+function throttle(fn, delay) {
+  let flag = true
+  return function(...args) {
+    if (!flag) { return }
+    flag = false
+    setTimeout(() => {
+      fn.apply(this, args)
+      flag = true
+    }, delay)
+  }
+}
+
 export default {
   filterNumberKeys,
   capitalizedFirstLetter,
@@ -279,5 +315,7 @@ export default {
   randomNums,
   getMinNMax,
   flatArray,
-  getWeekDate
+  getWeekDate,
+  debounce,
+  throttle
 }

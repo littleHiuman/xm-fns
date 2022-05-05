@@ -13,7 +13,7 @@ export function tipsUnknown(functionName) {
   ) {
     return tipsParams('functionName')
   }
-  throw new Error(`unknown state from ${functionName}:xm-utils`)
+  throw new Error(`unknown state from ${functionName}:xm-tools`)
 }
 
 /**

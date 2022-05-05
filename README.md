@@ -1,4 +1,4 @@
-# xm-utils
+# xm-tools
 
 一个常用功能的工具函数，包含css的、JavaScript的……
 

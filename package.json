@@ -1,5 +1,5 @@
 {
-  "name": "xm-utils",
+  "name": "xm-tools",
   "version": "1.0.0",
   "description": "a common functions utils, includes css, javascript ...",
   "main": "main.js",
@@ -8,7 +8,7 @@
     "test": "jest",
     "style": "eslint main.js src/**/*.js",
     "validate": "npm run build && npm run style && npm run test",
-    "genDocs": "node ./src/tools"
+    "genDocs": "node ./src/genDocs"
   },
   "keywords": [],
   "author": "",
