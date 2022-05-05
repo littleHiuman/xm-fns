@@ -1,6 +1,6 @@
 {
   "name": "xm-fns",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "一个常用功能的工具函数，包含css的、JavaScript的…… a common functions utils, includes css, javascript ...",
   "main": "dist/main.js",
   "scripts": {

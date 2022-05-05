@@ -30,7 +30,7 @@ function capitalizedFirstLetter(params) {
   if (variableType(params) !== 'String') {
     return tipsParams('capitalizedFirstLetter')
   }
-  if (!/^[a-zA-Z]+$/g.test(params)) {
+  if (!/^[a-zA-Z\s]+$/g.test(params)) {
     return tipsParams('capitalizedFirstLetter')
   }
   return params.slice(0, 1).toUpperCase() + params.slice(1)
