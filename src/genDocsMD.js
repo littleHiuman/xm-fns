@@ -226,8 +226,9 @@ function start() {
       }
       docInfo += title
       for (const item of allNames) {
-        docInfo += allInfo[item].text
-        const title2 = `[${item}](#${item.toLowerCase()})\n\n`
+        const obj = allInfo[item]
+        docInfo += obj.text
+        const title2 = `[${item}（${obj.desc}）](#${item.toLowerCase()})\n\n`
         genCatalog(title2)
       }
     }

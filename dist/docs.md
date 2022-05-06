@@ -1,63 +1,63 @@
 # 文档
 ## javascript
 
-[filterNumberKeys](#filternumberkeys)
+[filterNumberKeys（过滤对象中数值形式的key）](#filternumberkeys)
 
-[capitalizedFirstLetter](#capitalizedfirstletter)
+[capitalizedFirstLetter（首字母大写）](#capitalizedfirstletter)
 
-[percentNum](#percentnum)
+[percentNum（得到两数相除的百分数）](#percentnum)
 
-[variableType](#variabletype)
+[variableType（获取变量类型）](#variabletype)
 
-[uniqueArray](#uniquearray)
+[uniqueArray（数组去重）](#uniquearray)
 
-[uniqueComplexArray](#uniquecomplexarray)
+[uniqueComplexArray（对象数组去重）](#uniquecomplexarray)
 
-[randomNums](#randomnums)
+[randomNums（获取随机整数）](#randomnums)
 
-[getMinNMax](#getminnmax)
+[getMinNMax（获取数组中的最小值和最大值）](#getminnmax)
 
-[flatArray](#flatarray)
+[flatArray（数组拍平）](#flatarray)
 
-[getWeekDate](#getweekdate)
+[getWeekDate（获取本周的日期和周几）](#getweekdate)
 
-[formatDate](#formatdate)
+[formatDate（格式化日期）](#formatdate)
 
-[fillStr](#fillstr)
+[fillStr（给数值或字符串补充内容以满足长度）](#fillstr)
 
-[debounce](#debounce)
+[debounce（防抖）](#debounce)
 
-[throttle](#throttle)
+[throttle（节流）](#throttle)
 
 ## css
 
-[isColorVal](#iscolorval)
+[isColorVal（判断是否是颜色值）](#iscolorval)
 
-[isStringColorVal](#isstringcolorval)
+[isStringColorVal（判断是否是字符串颜色值）](#isstringcolorval)
 
-[stringColor2RGB](#stringcolor2rgb)
+[stringColor2RGB（字符串颜色值转换成RGB颜色值）](#stringcolor2rgb)
 
-[stringColor2HEX](#stringcolor2hex)
+[stringColor2HEX（字符串颜色值转换成十六进制颜色值）](#stringcolor2hex)
 
-[isRGBVal](#isrgbval)
+[isRGBVal（判断是否是RGB颜色值）](#isrgbval)
 
-[isHEXVal](#ishexval)
+[isHEXVal（判断是否是十六进制颜色值）](#ishexval)
 
-[isShortHEXVal](#isshorthexval)
+[isShortHEXVal（判断是否是缩写的十六进制颜色值）](#isshorthexval)
 
-[isLongHEXVal](#islonghexval)
+[isLongHEXVal（判断是否是六位的十六进制颜色值）](#islonghexval)
 
-[RGB2HEX](#rgb2hex)
+[RGB2HEX（RGB颜色值转换成十六进制颜色值）](#rgb2hex)
 
-[HEX2RGB](#hex2rgb)
+[HEX2RGB（十六进制颜色值转换成RGB颜色值）](#hex2rgb)
 
-[shortHEXVal2LongHEXVal](#shorthexval2longhexval)
+[shortHEXVal2LongHEXVal（缩写的十六进制颜色值转换成六位的十六进制颜色值）](#shorthexval2longhexval)
 
-[eqColorVal](#eqcolorval)
+[eqColorVal（比较两个颜色值是否是同一个颜色）](#eqcolorval)
 
-[assignCssObj](#assigncssobj)
+[assignCssObj（合并两个css样式对象）](#assigncssobj)
 
-[getCSSStyle](#getcssstyle)
+[getCSSStyle（获取dom元素的css的值）](#getcssstyle)
 
 
 ## javascript
