@@ -173,10 +173,8 @@ function Array2String(arr) {
 }
 
 function template({ name, desc, returnInfo, paramsInfo }) {
-  const title = `### [${name}](#${name})\n`
-  const title2 = `### <a id="${name}">${name}</a>\n`
-  genCatalog(title)
-  let str = `${title2}#### ${desc}`
+  const title = `### ${name}\n`
+  let str = `${title}#### ${desc}`
   const paramStr = Array2String(paramsInfo)
   if (paramStr) {
     str += `\n#### 参数：
@@ -218,24 +216,24 @@ function start() {
         isLoop: true,
         arr: annotations
       })
-      // const title = `## [${partRes}](#${partRes})\n`
-      // const title2 = `## <a id="${partRes}">${partRes}</a>\n`
       const title = `## ${partRes}\n`
-      const title2 = title
-      genCatalog(title)
+      const title2 = `${title}\n`
+      genCatalog(title2)
       const allInfo = {}
       for (const item of annotations) {
         const info = getFnInfo(item)
         allInfo[info.name] = info
       }
-      docInfo += title2
+      docInfo += title
       for (const item of allNames) {
         docInfo += allInfo[item].text
+        const title2 = `[${item}](#${item.toLowerCase()})\n\n`
+        genCatalog(title2)
       }
     }
   }
 }
 start()
 
-docInfo = `${catalogStr}<br/><br/>\n${docInfo}`
+docInfo = `${catalogStr}\n${docInfo}`
 fs.writeFileSync(filename, docInfo)
