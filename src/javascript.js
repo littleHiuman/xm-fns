@@ -270,6 +270,155 @@ export function getDateInfoNWeek(dd, day, showToday) {
 }
 
 /**
+ * @name: formatDate
+ * @description: 格式化日期
+ * @param {Date} dateObj 日期对象
+ * @param {String} formatStr 标识
+ * @return {String}
+ */
+function formatDate(dateObj, formatStr = 'YYYY-MM-DD') {
+  if (!(dateObj instanceof Date)) {
+    return tipsParams('formatDate')
+  }
+  const formatInfo = checkFormatDateSign(formatStr)
+  if (!formatInfo) {
+    return tipsParams('formatDate')
+  }
+  return concatFormatDate(dateObj, formatInfo)
+}
+/**
+ * @name: checkFormatDateSign
+ * @description: 检查标识
+ * @param {String} formatStr 标识
+ * @return {Object} 标识、分隔符
+ */
+function checkFormatDateSign(formatStr) {
+  const signs = {
+    Y: [2, 4],
+    M: [1, 2],
+    D: [1, 2],
+    H: [1, 2],
+    h: [1, 2],
+    m: [1, 2],
+    s: [1, 2]
+  }
+  const formatSign = formatStr.match(/[a-zA-Z]+/g)
+  if (!formatSign) {
+    return
+  }
+  const formatSignH = formatStr.match(/[Hh]+/g)
+  if (formatSignH && formatSignH.length == 2) {
+    return
+  }
+  for (const sign of formatSign) {
+    const startLetter = sign[0]
+    const len = sign.length
+    if (signs[startLetter] && signs[startLetter].includes(len)) {
+      const repeatStr = startLetter.repeat(len)
+      if (repeatStr != sign) {
+        return
+      }
+    } else {
+      return
+    }
+  }
+  const formatSplit = formatStr.match(/[^a-zA-Z]/g)
+  if (!formatSplit) {
+    return
+  }
+  if (formatSplit.length + 1 != formatSign.length) {
+    return
+  }
+  return { formatSign, formatSplit }
+}
+/**
+ * @name: concatFormatDate
+ * @description: 拼接日期
+ * @param {Date} dateObj 日期对象
+ * @param {Object} formatInfo 标识、分隔符
+ * @return {String}
+ */
+function concatFormatDate(dateObj, formatInfo) {
+  const { formatSign, formatSplit } = formatInfo
+  let splitIdx = 0
+  let res = ''
+  const year = dateObj.getFullYear()
+  const month = dateObj.getMonth() + 1
+  const date = dateObj.getDate()
+  const hour = dateObj.getHours()
+  const minutes = dateObj.getMinutes()
+  const seconds = dateObj.getSeconds()
+  // const A = hour > 12 ? 'PM' : 'AM'
+  const obj = {
+    Y: year,
+    M: month,
+    D: date,
+    H: hour,
+    h: hour>12?hour-12:hour,
+    m: minutes,
+    s: seconds
+  }
+  for (const sign of formatSign) {
+    const startLetter = sign[0]
+    const len = sign.length
+    const info = obj[startLetter]
+    if (startLetter == 'Y' && len == 2) {
+      res += `${info}`.slice(-2)
+    } else if (len == 2) {
+      res += fillZero(info, 2)
+    } else {
+      res += info
+    }
+    if (splitIdx < formatSplit.length) {
+      res += formatSplit[splitIdx++]
+    }
+  }
+  return res
+}
+/**
+ * @name: fillStr
+ * @description: 给数值或字符串补充内容以满足长度
+ * @param {Number | String} str 数值或字符串
+ * @param {Number} len 长度
+ * @param {Number | String} fill 要补充的内容（数值或字符串）
+ * @return {String}
+ */
+function fillStr(str, len, fill) {
+  if (variableType(str) !== 'String' && variableType(str) !== 'Number') {
+    return tipsParams('fillStr')
+  }
+  if (variableType(len) !== 'Number') {
+    return tipsParams('fillStr')
+  }
+  if (variableType(fill) !== 'String' && variableType(fill) !== 'Number') {
+    return tipsParams('fillStr')
+  }
+  str = `${str}`
+  const strLen = str.length
+  if (strLen >= len) {
+    return str
+  }
+  const between = len - strLen
+  return `${fill}`.repeat(between) + str
+}
+/**
+ * @name: fillZero
+ * @description: 给数值或字符串补充0以满足长度
+ * @param {Number | String} str 数值或字符串
+ * @param {String} len 长度
+ * @return {String}
+ */
+function fillZero(str, len) {
+  if (variableType(str) !== 'String' && variableType(str) !== 'Number') {
+    return tipsParams('fillZero')
+  }
+  if (variableType(len) !== 'Number') {
+    return tipsParams('fillZero')
+  }
+  return fillStr(str, len, 0)
+}
+
+/**
  * @name: debounce
  * @description: 防抖
  * @param {Function} fn
@@ -296,7 +445,9 @@ function debounce(fn, delay) {
 function throttle(fn, delay) {
   let flag = true
   return function(...args) {
-    if (!flag) { return }
+    if (!flag) {
+      return
+    }
     flag = false
     setTimeout(() => {
       fn.apply(this, args)
@@ -316,6 +467,8 @@ export default {
   getMinNMax,
   flatArray,
   getWeekDate,
+  formatDate,
+  fillStr,
   debounce,
   throttle
 }

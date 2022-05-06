@@ -1,14 +1,14 @@
 {
   "name": "xm-fns",
-  "version": "1.0.1",
-  "description": "一个常用功能的工具函数，包含css的、JavaScript的…… a common functions utils, includes css, javascript ...",
+  "version": "1.0.2",
+  "description": "一个前端的常用方法的工具库，包含CSS的、JavaScript的…… A front-end tool library for common methods, includes CSS, JavaScript ...",
   "main": "dist/main.js",
   "scripts": {
     "build": "rollup -c",
     "test": "jest",
     "style": "eslint main.js src/**/*.js",
     "validate": "npm run build && npm run style && npm run test",
-    "genDocs": "node ./src/genDocs"
+    "genDocs": "node ./src/genDocsMD"
   },
   "keywords": [],
   "author": "littleHiuman",

@@ -1,8 +1,10 @@
 # xm-fns
 
-一个常用功能的工具函数，包含css的、JavaScript的……
+一个前端的常用方法的工具库，包含CSS的、JavaScript的……
 
-[文档](./dist/docs.html)
+A front-end tool library for common methods, includes CSS, JavaScript ...
+
+[文档](./dist/docs.md)
 
 ## 命令
 
