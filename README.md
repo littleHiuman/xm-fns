@@ -4,9 +4,16 @@
 
 A front-end tool library for common methods, includes CSS, JavaScript ...
 
+[xm-fns - npm](https://www.npmjs.com/package/xm-fns)
+
 [文档](./dist/docs.md)
 
-## 命令
+## npm 命令
+
+### 安装
+`npm install xm-fns`
+
+## 项目命令
 
 ### 打包
 `npm run build`
