@@ -29,6 +29,8 @@
 
 [throttle（节流）](#throttle)
 
+[deepClone（深拷贝）](#deepclone)
+
 ## css
 
 [isColorVal（判断是否是颜色值）](#iscolorval)
@@ -198,6 +200,15 @@
 
 #### 返回值：
 		类型：Function
+
+---
+### deepClone
+#### 深拷贝
+#### 参数：
+		item，类型：any
+
+#### 返回值：
+		类型：any
 
 ---
 ## css

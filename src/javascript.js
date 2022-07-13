@@ -354,7 +354,7 @@ function concatFormatDate(dateObj, formatInfo) {
     M: month,
     D: date,
     H: hour,
-    h: hour>12?hour-12:hour,
+    h: hour > 12 ? hour - 12 : hour,
     m: minutes,
     s: seconds
   }
@@ -456,6 +456,107 @@ function throttle(fn, delay) {
   }
 }
 
+/**
+ * @name: deepClone
+ * @description: 深拷贝
+ * @param {any} item
+ * @return {any}
+ */
+function deepClone(item) {
+  if (variableType(item) == 'Array') {
+    return cloneArray(item)
+  } else if (variableType(item) == 'Object') {
+    return cloneObj(item)
+  } else if (
+    variableType(item) == 'Map'
+  ) {
+    return cloneMap(item)
+  } else if (
+    variableType(item) == 'Set'
+  ) {
+    return cloneSet(item)
+  } else if (variableType(item) == 'Date') {
+    return new Date(new Date().setTime(item.getTime()))
+  } else if (variableType(item) == 'RegExp') {
+    return new RegExp(item.source, item.flags)
+  } else if (variableType(item) == 'Function') {
+    return item.bind()
+  }
+  return item
+}
+
+/**
+ * @name: cloneArray
+ * @description: 深拷贝数组
+ * @param {Array} arrObj
+ * @return {Array}
+ */
+function cloneArray(arrObj) {
+  const temArr = []
+  for (const item of arrObj) {
+    if (item == arrObj) {
+      temArr.push(temArr)
+    } else {
+      temArr.push(deepClone(item))
+    }
+  }
+  return temArr
+}
+/**
+ * @name: cloneObj
+ * @description: 深拷贝对象
+ * @param {Object} obj
+ * @return {Object}
+ */
+function cloneObj(obj) {
+  const temObj = {}
+  for (const key in obj) {
+    if (Object.hasOwnProperty.call(obj, key)) {
+      const item = obj[key]
+      if (item == obj) {
+        temObj[key] = temObj
+      } else {
+        temObj[key] = deepClone(item)
+      }
+    }
+  }
+  return temObj
+}
+/**
+ * @name: cloneMap
+ * @description: 深拷贝 Map
+ * @param {Map} mapObj
+ * @return {Map}
+ */
+function cloneMap(mapObj) {
+  const map = new Map()
+  for (const [key, value] of mapObj) {
+    if (value == mapObj) {
+      map.set(key, map)
+    } else {
+      map.set(key, deepClone(value))
+    }
+  }
+  return map
+}
+/**
+ * @name: cloneMap
+ * @description: 深拷贝 Set
+ * @param {Set} setObj
+ * @return {Set}
+ */
+function cloneSet(setObj) {
+  const set = new Set()
+  for (const item of setObj) {
+    if (item == setObj) {
+      set.add(set)
+    } else {
+      set.add(deepClone(item))
+    }
+  }
+  return set
+}
+
 export default {
   filterNumberKeys,
   capitalizedFirstLetter,
@@ -470,5 +571,6 @@ export default {
   formatDate,
   fillStr,
   debounce,
-  throttle
+  throttle,
+  deepClone
 }
