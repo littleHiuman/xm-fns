@@ -4,9 +4,24 @@
 
 A front-end tool library for common methods, includes CSS, JavaScript ...
 
+[xm-fns - npm 地址](https://www.npmjs.com/package/xm-fns)
+
+[xm-fns - Github 地址](https://github.com/littleHiuman/xm-fns)
+
 [文档](./dist/docs.md)
 
-## 命令
+## 安装
+`npm install xm-fns`
+
+## 使用
+
+```js
+import { debounce } from 'xm-fns'
+function fn () { ... }
+var myFn = debounce(fn, 1000)
+```
+
+## 项目命令
 
 ### 打包
 `npm run build`
@@ -22,3 +37,6 @@ A front-end tool library for common methods, includes CSS, JavaScript ...
 
 ### 生成文档
 `npm run genDocs`
+
+## 其他
+如果使用过程中，有bug、建议/意见都可以提issue~
