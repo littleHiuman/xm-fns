@@ -31,6 +31,24 @@
 
 [deepClone（深拷贝）](#deepclone)
 
+[stop（禁止滚动条滚动）](#stop)
+
+[move（恢复滚动条滚动）](#move)
+
+[numFormat（数值增加千位符（,））](#numformat)
+
+[getUrlParam（获取URL的单个参数）](#geturlparam)
+
+[getUrlParams（获取URL的多个参数）](#geturlparams)
+
+[setUrlParam（设置URL的单个参数）](#seturlparam)
+
+[setUrlParams（设置URL的多个参数）](#seturlparams)
+
+[deleteUrlParam（删除URL的参数）](#deleteurlparam)
+
+[deleteUrlParams（删除URL的参数）](#deleteurlparams)
+
 ## css
 
 [isColorVal（判断是否是颜色值）](#iscolorval)
@@ -209,6 +227,94 @@
 
 #### 返回值：
 		类型：any
+
+---
+### stop
+#### 禁止滚动条滚动
+#### 参数：
+		类型：void
+
+#### 返回值：
+		类型：void
+
+---
+### move
+#### 恢复滚动条滚动
+#### 参数：
+		类型：void
+
+#### 返回值：
+		类型：void
+
+---
+### numFormat
+#### 数值增加千位符（,）
+#### 参数：
+		num，类型：Number
+
+#### 返回值：
+		类型：String
+
+---
+### getUrlParam
+#### 获取URL的单个参数
+#### 参数：
+		key，类型：String，描述：参数名
+		url，类型：String，描述：URL地址，不传的话会取location.href
+
+#### 返回值：
+		类型：String，描述：参数值
+
+---
+### getUrlParams
+#### 获取URL的多个参数
+#### 参数：
+		keys，类型：Array，描述：参数名列表
+		url，类型：String，描述：URL地址，不传的话会取location.href
+
+#### 返回值：
+		类型：Object
+
+---
+### setUrlParam
+#### 设置URL的单个参数
+#### 参数：
+		key，类型：String，描述：参数名
+		val，类型：String | Number，描述：参数值
+		url，类型：String，描述：URL地址，不传的话会取location.href
+
+#### 返回值：
+		类型：String，描述：新的URL
+
+---
+### setUrlParams
+#### 设置URL的多个参数
+#### 参数：
+		params，类型：Object
+		url，类型：String，描述：URL地址，不传的话会取location.href
+
+#### 返回值：
+		类型：String，描述：新的URL
+
+---
+### deleteUrlParam
+#### 删除URL的参数
+#### 参数：
+		key，类型：String，描述：参数名
+		url，类型：String，描述：URL地址，不传的话会取location.href
+
+#### 返回值：
+		类型：String，描述：新的URL
+
+---
+### deleteUrlParams
+#### 删除URL的参数
+#### 参数：
+		keys，类型：Array，描述：参数名列表
+		url，类型：String，描述：URL地址，不传的话会取location.href
+
+#### 返回值：
+		类型：String，描述：新的URL
 
 ---
 ## css

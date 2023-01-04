@@ -467,13 +467,9 @@ function deepClone(item) {
     return cloneArray(item)
   } else if (variableType(item) == 'Object') {
     return cloneObj(item)
-  } else if (
-    variableType(item) == 'Map'
-  ) {
+  } else if (variableType(item) == 'Map') {
     return cloneMap(item)
-  } else if (
-    variableType(item) == 'Set'
-  ) {
+  } else if (variableType(item) == 'Set') {
     return cloneSet(item)
   } else if (variableType(item) == 'Date') {
     return new Date(new Date().setTime(item.getTime()))
@@ -557,6 +553,178 @@ function cloneSet(setObj) {
   return set
 }
 
+/**
+ * @name: stop
+ * @description: 禁止滚动条滚动
+ * @param {void}
+ * @return {void}
+ */
+function stop() {
+  const mo = function(e) {
+    e.preventDefault()
+  }
+  document.body.style.overflow = 'hidden'
+  document.addEventListener('touchmove', mo, false)
+}
+
+/**
+ * @name: move
+ * @description: 恢复滚动条滚动
+ * @param {void}
+ * @return {void}
+ */
+function move() {
+  const mo = function(e) {
+    e.preventDefault()
+  }
+  document.body.style.overflow = ''
+  document.removeEventListener('touchmove', mo, false)
+}
+
+/**
+ * @name: numFormat
+ * @description: 数值增加千位符（,）
+ * @param {Number} num
+ * @return {String}
+ */
+function numFormat(num) {
+  if (variableType(num) !== 'Number') {
+    return tipsParams('numFormat')
+  }
+  const res = num
+    .toString()
+    .replace(/\d+/, n => n.replace(/(\d)(?=(\d{3})+$)/g, $1 => `${$1},`))
+  return res
+}
+
+/**
+ * @name: getUrlParam
+ * @description: 获取URL的单个参数
+ * @param {String} key 参数名
+ * @param {String} url URL地址，不传的话会取location.href
+ * @return {String} 参数值
+ */
+function getUrlParam(key, url) {
+  if (variableType(key) !== 'String') {
+    return tipsParams('getUrlParam')
+  }
+  if (variableType(url) !== 'String') {
+    return tipsParams('getUrlParam')
+  }
+  const urlObj = new URL(url || location.href)
+  return urlObj.searchParams.get(key) || ''
+}
+
+/**
+ * @name: getUrlParams
+ * @description: 获取URL的多个参数
+ * @param {Array} keys 参数名列表
+ * @param {String} url URL地址，不传的话会取location.href
+ * @return {Object}
+ */
+function getUrlParams(keys, url) {
+  if (variableType(keys) !== 'Array') {
+    return tipsParams('getUrlParams')
+  }
+  if (variableType(url) !== 'String') {
+    return tipsParams('getUrlParams')
+  }
+  const obj = {}
+  const keysArr = uniqueArray(keys)
+  for (const key of keysArr) {
+    obj[key] = getUrlParam(key, url)
+  }
+  return obj
+}
+
+/**
+ * @name: setUrlParam
+ * @description: 设置URL的单个参数
+ * @param {String} key 参数名
+ * @param {String | Number} val 参数值
+ * @param {String} url URL地址，不传的话会取location.href
+ * @return {String} 新的URL
+ */
+function setUrlParam(key, val, url) {
+  if (variableType(key) !== 'String') {
+    return tipsParams('setUrlParam')
+  }
+  if (variableType(val) !== 'String' || variableType(val) !== 'Number') {
+    return tipsParams('setUrlParam')
+  }
+  if (variableType(url) !== 'String') {
+    return tipsParams('setUrlParam')
+  }
+  const urlObj = new URL(url || location.href)
+  urlObj.searchParams.set(key, val)
+  return urlObj.href
+}
+
+/**
+ * @name: setUrlParams
+ * @description: 设置URL的多个参数
+ * @param {Object} params
+ * @param {String} url URL地址，不传的话会取location.href
+ * @return {String} 新的URL
+ */
+function setUrlParams(params, url) {
+  if (variableType(params) !== 'Object') {
+    return tipsParams('setUrlParams')
+  }
+  if (variableType(url) !== 'String') {
+    return tipsParams('setUrlParams')
+  }
+  let afterUrl = url
+  for (const key in params) {
+    if (Object.hasOwnProperty.call(params, key)) {
+      const val = params[key]
+      afterUrl = setUrlParam(key, val, afterUrl)
+    }
+  }
+  return afterUrl
+}
+
+/**
+ * @name: deleteUrlParam
+ * @description: 删除URL的参数
+ * @param {String} key 参数名
+ * @param {String} url URL地址，不传的话会取location.href
+ * @return {String} 新的URL
+ */
+function deleteUrlParam(key, url) {
+  if (variableType(key) !== 'String') {
+    return tipsParams('deleteUrlParam')
+  }
+  if (variableType(url) !== 'String') {
+    return tipsParams('deleteUrlParam')
+  }
+  const urlObj = new URL(url || location.href)
+  urlObj.searchParams.delete(key)
+  return urlObj.href
+}
+
+/**
+ * @name: deleteUrlParams
+ * @description: 删除URL的参数
+ * @param {Array} keys 参数名列表
+ * @param {String} url URL地址，不传的话会取location.href
+ * @return {String} 新的URL
+ */
+function deleteUrlParams(keys, url) {
+  if (variableType(keys) !== 'Array') {
+    return tipsParams('deleteUrlParams')
+  }
+  if (variableType(url) !== 'String') {
+    return tipsParams('deleteUrlParams')
+  }
+  const keysArr = uniqueArray(keys)
+  let afterUrl = url
+  for (const key of keysArr) {
+    afterUrl = deleteUrlParam(key, afterUrl)
+  }
+  return afterUrl
+}
+
 export default {
   filterNumberKeys,
   capitalizedFirstLetter,
@@ -572,5 +740,14 @@ export default {
   fillStr,
   debounce,
   throttle,
-  deepClone
+  deepClone,
+  stop,
+  move,
+  numFormat,
+  getUrlParam,
+  getUrlParams,
+  setUrlParam,
+  setUrlParams,
+  deleteUrlParam,
+  deleteUrlParams
 }
