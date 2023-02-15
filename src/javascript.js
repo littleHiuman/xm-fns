@@ -211,8 +211,8 @@ function flatArray(arr) {
 /**
  * @name: getWeekDate
  * @description: 获取本周的日期和周几
- * @param {Number} startDay
- * @param {Boolean} showToday
+ * @param {Number} startDay 开始时间
+ * @param {Boolean} showToday 显示今日还是显示周几，true显示今日
  * @return {Array}
  */
 function getWeekDate(startDay = -1, showToday = false) {
@@ -725,6 +725,64 @@ function deleteUrlParams(keys, url) {
   return afterUrl
 }
 
+/**
+ * @name: isEmptyObject
+ * @description: 判断是否是空对象
+ * @param {Object} obj 对象
+ * @return {Boolean}
+ */
+function isEmptyObject(obj) {
+  if (variableType(obj) !== 'Object') {
+    return tipsParams('isEmptyObject')
+  }
+  return Object.keys(obj).length === 0
+}
+
+/**
+ * @name: getDays
+ * @description: 获取最近的（一个或多个）周几（不包括今天）
+ * @param {Number} weekday 周几（0-6）
+ * @param {Number} num 个数（大于0）
+ * @param {Number} startDay 开始时间（大于此刻）（可选参数）
+ * @param {Object} lastResult 之前的结果（可选参数）
+ * @return {Array} 结果
+ */
+function getDays(weekday, num, startDay, lastResult) {
+  if ([0, 1, 2, 3, 4, 5, 6].indexOf(weekday) === -1 || num <= 0) {
+    return tipsParams('getDays')
+  }
+  const todayDate = new Date()
+  if (startDay) {
+    if (variableType(startDay) !== 'Number' || startDay < todayDate.getTime()) {
+      return tipsParams('getDays')
+    }
+  }
+  if (lastResult) {
+    if (variableType(lastResult) !== 'Array') {
+      return tipsParams('getDays')
+    }
+  }
+
+  const date = startDay ? new Date(startDay) : todayDate
+  const day = date.getDay()
+  const oneDay = 24 * 60 * 60 * 1000
+  let stepDays
+  const result = lastResult ? lastResult : []
+  if (day == weekday) {
+    stepDays = 7 * oneDay
+  } else if (day < weekday) {
+    stepDays = (weekday - day) * oneDay
+  } else if (day > weekday) {
+    stepDays = (7 - day + weekday) * oneDay
+  }
+  const afterDay = new Date(date.getTime() + stepDays)
+  result.push(afterDay)
+  if (--num) {
+    getDays(weekday, num, afterDay.getTime(), result)
+  }
+  return result
+}
+
 export default {
   filterNumberKeys,
   capitalizedFirstLetter,
@@ -749,5 +807,7 @@ export default {
   setUrlParam,
   setUrlParams,
   deleteUrlParam,
-  deleteUrlParams
+  deleteUrlParams,
+  isEmptyObject,
+  getDays
 }
