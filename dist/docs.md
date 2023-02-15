@@ -49,6 +49,10 @@
 
 [deleteUrlParams（删除URL的参数）](#deleteurlparams)
 
+[isEmptyObject（判断是否是空对象）](#isemptyobject)
+
+[getDays（获取最近的（一个或多个）周几（不包括今天））](#getdays)
+
 ## css
 
 [isColorVal（判断是否是颜色值）](#iscolorval)
@@ -172,8 +176,8 @@
 ### getWeekDate
 #### 获取本周的日期和周几
 #### 参数：
-		startDay，类型：Number
-		showToday，类型：Boolean
+		startDay，类型：Number，描述：开始时间
+		showToday，类型：Boolean，描述：显示今日还是显示周几，true显示今日
 
 #### 返回值：
 		类型：Array
@@ -315,6 +319,27 @@
 
 #### 返回值：
 		类型：String，描述：新的URL
+
+---
+### isEmptyObject
+#### 判断是否是空对象
+#### 参数：
+		obj，类型：Object，描述：对象
+
+#### 返回值：
+		类型：Boolean
+
+---
+### getDays
+#### 获取最近的（一个或多个）周几（不包括今天）
+#### 参数：
+		weekday，类型：Number，描述：周几（0-6）
+		num，类型：Number，描述：个数（大于0）
+		startDay，类型：Number，描述：开始时间（大于此刻）（可选参数）
+		lastResult，类型：Object，描述：之前的结果（可选参数）
+
+#### 返回值：
+		类型：Array，描述：结果
 
 ---
 ## css
