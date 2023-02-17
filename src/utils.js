@@ -1,4 +1,17 @@
-import { variableType } from './javascript'
+/**
+ * @name: checkFunctionName
+ * @description: 检查函数名称
+ * @param {String} functionName
+ * @return {Void}
+ */
+function checkFunctionName(functionName) {
+  if (variableType(functionName) !== 'String') {
+    throw new Error(`${functionName}错误`)
+  }
+  if (!/^[a-zA-Z]+$/g.test(functionName)) {
+    throw new Error(`${functionName}错误`)
+  }
+}
 
 /**
  * @name: tipsUnknown
@@ -7,12 +20,7 @@ import { variableType } from './javascript'
  * @return {Void}
  */
 export function tipsUnknown(functionName) {
-  if (
-    variableType(functionName) !== 'String' ||
-    !/^[a-zA-Z]+$/g.test(functionName)
-  ) {
-    return tipsParams('functionName')
-  }
+  checkFunctionName(functionName)
   throw new Error(`unknown state from ${functionName}:xm-fns`)
 }
 
@@ -23,11 +31,17 @@ export function tipsUnknown(functionName) {
  * @return {Void}
  */
 export function tipsParams(functionName) {
-  if (variableType(functionName) !== 'String') {
-    throw new Error('functionName错误')
-  }
-  if (!/^[a-zA-Z]+$/g.test(functionName)) {
-    throw new Error('functionName错误')
-  }
+  checkFunctionName(functionName)
   throw new Error(`${functionName}: 参数错误`)
+}
+
+/**
+ * @name: variableType
+ * @description: 获取变量类型
+ * @param {*} params
+ * @return {String} 变量的类型（首字母大写的形式）
+ */
+export function variableType(params) {
+  const res = Object.prototype.toString.call(params)
+  return res.slice(8, res.length - 1)
 }
