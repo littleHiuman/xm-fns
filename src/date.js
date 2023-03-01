@@ -256,10 +256,55 @@ function getDays(weekday, num, startDay, lastResult) {
   return result
 }
 
+/**
+ * @name: getTimeDiffFormat
+ * @description: 时间处理方法(显示几天前、几小时前、几分钟前……)
+ * @param {Number} time 时间戳（过去的时间）
+ * @return {String} 匹配后的字符串
+ */
+function getTimeDiffFormat(time) {
+  if (variableType(time) !== 'Number') {
+    return tipsParams('getTimeDiffFormat')
+  }
+  const calcTime = time
+  const now = new Date().getTime()
+  if (now < calcTime) {
+    return tipsParams('getTimeDiffFormat')
+  }
+  const between = now - calcTime
+  const second = 1000 // 秒
+  const minute = 60 * second // 分
+  const hour = 60 * minute // 时
+  const day = 24 * hour // 天
+  const month = 30 * day // 月
+  const year = 12 * month // 年
+  if (between < second) {
+    return '刚刚'
+  }
+  if (between < minute) {
+    return `${parseInt(between / second)}秒前`
+  }
+  if (between < hour) {
+    return `${parseInt(between / minute)}分钟前`
+  }
+  if (between < day) {
+    return `${parseInt(between / hour)}小时前`
+  }
+  if (between < month) {
+    return `${parseInt(between / day)}天前`
+  }
+  if (between < year) {
+    return `${parseInt(between / month)}月前`
+  }
+  return `${parseInt(between / year)}年前`
+}
+
 export default {
   getWeekDate,
+  getDateInfoNWeek,
   formatDate,
   fillZero,
   fillStr,
-  getDays
+  getDays,
+  getTimeDiffFormat
 }

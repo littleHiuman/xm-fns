@@ -389,7 +389,6 @@ function isEmptyObject(obj) {
 }
 
 export default {
-  variableType,
   filterNumberKeys,
   capitalizedFirstLetter,
   percentNum,

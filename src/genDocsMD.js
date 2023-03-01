@@ -189,7 +189,13 @@ ${returnStr}`
   return str
 }
 
-const fileList = ['./javascript.js', './css.js']
+const res = fs.readdirSync(`${__dirname}/`)
+const fileList = res.filter(item => !item.startsWith('.')&&!item.startsWith('genDocs'))
+for (const key in fileList) {
+  const file = fileList[key]
+  fileList[key]=`./${file}`
+}
+// const fileList = ['./javascript.js', './css.js']
 const filename = path.join(__dirname, '../dist/docs.md')
 let docInfo = ''
 

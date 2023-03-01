@@ -45,3 +45,7 @@ export function variableType(params) {
   const res = Object.prototype.toString.call(params)
   return res.slice(8, res.length - 1)
 }
+
+export default {
+  variableType
+}
