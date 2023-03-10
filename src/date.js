@@ -299,6 +299,75 @@ function getTimeDiffFormat(time) {
   return `${parseInt(between / year)}年前`
 }
 
+/**
+ * @name: getMonthDay
+ * @description: 获取这个月的所有天数与星期
+ * @param {Boolean} isFillBlank 是否需要补充空白（默认不补充），如：1号不是周一/周日时、最后一天不是周日/周六时，补充空对象占位
+ * @param {Boolean} isFirstDayMonday 一周的第一天是周几（isFillBlank为true时有效，默认第一天是周日），true代表第一天是周一，false代表第一天是周日
+ * @param {String|Number|Date} customDate 自定义日期，默认是new Date()，字符串如：2022-1，数值如：new Date('2022-1').getTime()，Date如：new Date('2022-1')
+ * @return {Array} {date:Number,weekday:Number}格式的数据；date对应这个月几号，weekday对应周几，0-6
+ */
+function getMonthDay(isFillBlank = false, isFirstDayMonday = false, customDate=new Date()) {
+  if (variableType(isFillBlank) !== 'Boolean') {
+    return tipsParams('getMonthDay')
+  }
+  if (variableType(isFirstDayMonday) !== 'Boolean') {
+    return tipsParams('getMonthDay')
+  }
+
+  let dateObj
+  if (customDate !== undefined) {
+    if (variableType(customDate) === 'String') {
+      // 字符串
+      const res = customDate.split(/[^\d]/g)
+      if (res.length !== 2) {
+        return tipsParams('getMonthDay')
+      }
+      dateObj = new Date(res.join('-'))
+    } else if (variableType(customDate) === 'Number') {
+      // 数值
+      dateObj = new Date(customDate)
+    } else if (variableType(customDate) === 'Date') {
+      // Date对象
+      dateObj = customDate
+    } else {
+      return tipsParams('getMonthDay')
+    }
+  }
+  const firstDay = `${dateObj.getFullYear()}-${
+    dateObj.getMonth() + 1
+  }-1`
+  const lastDay = `${dateObj.getFullYear()}-${
+    dateObj.getMonth() + 2
+  }-1`
+  const firstDayDateObj = new Date(firstDay)
+  const lastDayDateObj = new Date(
+    new Date(lastDay).getTime() - 24 * 60 * 60 * 1000
+  )
+  const firstDayWeekday = firstDayDateObj.getDay()
+  const lastDayDate = lastDayDateObj.getDate()
+  const arr = []
+  for (let i = 0; i < lastDayDate; i++) {
+    arr.push({
+      date: i + 1,
+      weekday: (firstDayWeekday + i) % 7
+    })
+  }
+  if (isFillBlank) {
+    const lastDayWeekday = lastDayDateObj.getDay()
+    let prefix = firstDayWeekday
+    let suffix = 7 - lastDayWeekday - 1
+    if (isFirstDayMonday) {
+      prefix = (firstDayWeekday + 6) % 7
+      suffix = (7 - lastDayWeekday) % 7
+    }
+    const temArr = [{}, {}, {}, {}, {}, {}, {}]
+    arr.unshift(...temArr.slice(0, prefix))
+    arr.push(...temArr.slice(0, suffix))
+  }
+  return arr
+}
+
 export default {
   getWeekDate,
   getDateInfoNWeek,
@@ -306,5 +375,6 @@ export default {
   fillZero,
   fillStr,
   getDays,
-  getTimeDiffFormat
+  getTimeDiffFormat,
+  getMonthDay
 }

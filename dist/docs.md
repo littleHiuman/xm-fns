@@ -45,6 +45,8 @@
 
 [getTimeDiffFormat（时间处理方法(显示几天前、几小时前、几分钟前……)）](#gettimediffformat)
 
+[getMonthDay（获取这个月的所有天数与星期）](#getmonthday)
+
 ## javascript
 
 [filterNumberKeys（过滤对象中数值形式的key）](#filternumberkeys)
@@ -297,6 +299,17 @@
 
 #### 返回值：
 		类型：String，描述：匹配后的字符串
+
+---
+### getMonthDay
+#### 获取这个月的所有天数与星期
+#### 参数：
+		isFillBlank，类型：Boolean，描述：是否需要补充空白（默认不补充），如：1号不是周一/周日时、最后一天不是周日/周六时，补充空对象占位
+		isFirstDayMonday，类型：Boolean，描述：一周的第一天是周几（isFillBlank为true时有效，默认第一天是周日），true代表第一天是周一，false代表第一天是周日
+		customDate，类型：String|Number|Date，描述：自定义日期，默认是new
+
+#### 返回值：
+		类型：Array，描述：{date:Number,weekday:Number}格式的数据；date对应这个月几号，weekday对应周几，0-6
 
 ---
 ## javascript
