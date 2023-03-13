@@ -12,18 +12,26 @@ declare module 'xm-fns' {
   declare function HEX2RGB(HEXVal: string): string;
   declare function shortHEXVal2LongHEXVal(HEXVal: string): string;
   declare function eqColorVal(val1: string, val2: string): boolean;
-  declare function assignCssObj(base: Object<any>, obj: Object<any>): Object<any>;
+  declare function assignCssObj(base: CSSStyleDeclaration|DOMRect|Object<any>, obj: CSSStyleDeclaration|DOMRect|Object<any>): any;
   declare function getCSSStyle(dom: HTMLElement): Object<any>;
 
   /**date */
-  declare function getWeekDate(startDay?: number = -1, showToday?: boolean = false): Array<any>;
-  declare function getDateInfoNWeek(dd: Date, day: number, showToday: boolean): Object<any>;
+  interface CheckFormatDateSignType {
+    formatSign: any
+    formatSplit: any
+  }
+  interface WeekdayType {
+    date?: string
+    week?: string
+  }
+  declare function getWeekDate(startDay?: number = -1, showToday?: boolean = false): Array<WeekdayType>;
+  declare function getDateInfoNWeek(dd: Date, day: number, showToday: boolean): Object<WeekdayType>;
   declare function formatDate(dateObj: Date, formatStr?: string = 'YYYY-MM-DD'): string;
   declare function fillZero(str: number|string, len: number): string;
   declare function fillStr(str: number|string, len: number, fill: number|string): string;
-  declare function getDays(weekday: number, num: number, startDay: number, lastResult: Array<any>): Array<any>;
+  declare function getDays(weekday: number, num: number, startDay?: number, lastResult?: Array<any>): Array<any>;
   declare function getTimeDiffFormat(time: number): string;
-  declare function getMonthDay(isFillBlank?: boolean = false, isFirstDayMonday?: boolean = false, customDate?: Date = new Date()): Array<any>;
+  declare function getMonthDay(isFillBlank?: boolean = false, isFirstDayMonday?: boolean = false, customDate?: Date = new Date()): Array<WeekdayType>;
 
   /**javascript */
   declare function filterNumberKeys(obj: Object<any>): Object<any>;

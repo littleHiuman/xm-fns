@@ -4,6 +4,8 @@
 
 A front-end tool library for common methods, includes CSS, JavaScript ...
 
+💐：1.0.8 版本开始有代码提示啦（仅 npm 包的方式）
+
 [xm-fns - npm 地址](https://www.npmjs.com/package/xm-fns)
 
 [xm-fns - Github 地址](https://github.com/littleHiuman/xm-fns)

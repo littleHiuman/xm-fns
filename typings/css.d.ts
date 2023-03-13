@@ -15,5 +15,5 @@ export declare function RGB2HEX(RGBVal: string): string;
 export declare function HEX2RGB(HEXVal: string): string;
 export declare function shortHEXVal2LongHEXVal(HEXVal: string): string;
 export declare function eqColorVal(val1: string, val2: string): boolean;
-export declare function assignCssObj(base: Object<any>, obj: Object<any>): Object<any>;
+export declare function assignCssObj(base: CSSStyleDeclaration|DOMRect|Object<any>, obj: CSSStyleDeclaration|DOMRect|Object<any>): any;
 export declare function getCSSStyle(dom: HTMLElement): Object<any>;
