@@ -16,7 +16,19 @@ A front-end tool library for common methods, includes CSS, JavaScript ...
 ## 使用
 
 ```js
+// npm 包的方式：
+// 1. 解构引入
 import { debounce } from 'xm-fns'
+// 2. 引入全部
+// import xmFns from 'xm-fns'
+// const debounce = xmFns.debounce
+
+// cdn 包的方式
+// 解构引入
+// const { debounce } = window.xmFns
+// 或
+// const debounce = window.xmFns.debounce
+
 function fn () { ... }
 var myFn = debounce(fn, 1000)
 ```

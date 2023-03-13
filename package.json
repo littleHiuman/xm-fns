@@ -14,7 +14,8 @@
   "author": "littleHiuman",
   "license": "MIT",
   "files": [
-    "dist"
+    "dist",
+    "typings"
   ],
   "repository": {
     "type": "git",
@@ -28,7 +29,8 @@
     "jest": "^27.4.3",
     "rewire": "^5.0.0",
     "rollup-plugin-babel": "^4.4.0",
-    "rollup-plugin-terser": "^7.0.2"
+    "rollup-plugin-terser": "^7.0.2",
+    "typescript": "^4.9.5"
   },
   "config": {
     "commitizen": {
@@ -37,5 +39,9 @@
     "cz-customizable": {
       "config": ".cz-config.js"
     }
-  }
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "typings": "typings/main.d.ts"
 }

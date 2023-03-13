@@ -12,4 +12,7 @@ const allUtils = Object.assign(
   xmUrlUtils,
   utils
 )
+if (window) {
+  window.xmFns = allUtils
+}
 export default allUtils
