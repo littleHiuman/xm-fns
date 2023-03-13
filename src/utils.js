@@ -6,10 +6,10 @@
  */
 function checkFunctionName(functionName) {
   if (variableType(functionName) !== 'String') {
-    throw new Error(`${functionName}错误`)
+    throw new Error(`${functionName}有误`)
   }
   if (!/^[a-zA-Z]+$/g.test(functionName)) {
-    throw new Error(`${functionName}错误`)
+    throw new Error(`${functionName}有误`)
   }
 }
 
@@ -26,13 +26,17 @@ export function tipsUnknown(functionName) {
 
 /**
  * @name: tipsParams
- * @description: 打印函数占位提示（参数错误）
+ * @description: 打印函数占位提示（参数有误）
  * @param {String} functionName
+ * @param {String} param
  * @return {Void}
  */
-export function tipsParams(functionName) {
+export function tipsParams(functionName, param) {
   checkFunctionName(functionName)
-  throw new Error(`${functionName}: 参数错误`)
+  if (variableType(param) !== 'String') {
+    throw new Error(`tipsParams: 参数param有误`)
+  }
+  throw new Error(`${functionName}: 参数${param}有误`)
 }
 
 /**

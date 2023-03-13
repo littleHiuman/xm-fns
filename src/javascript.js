@@ -8,7 +8,7 @@ import { tipsParams, variableType } from './utils'
  */
 export function filterNumberKeys(obj) {
   if (variableType(obj) !== 'Object') {
-    return tipsParams('filterNumberKeys')
+    return tipsParams('filterNumberKeys', 'obj')
   }
   const temObj = {}
   for (const key in obj) {
@@ -28,10 +28,10 @@ export function filterNumberKeys(obj) {
  */
 function capitalizedFirstLetter(params) {
   if (variableType(params) !== 'String') {
-    return tipsParams('capitalizedFirstLetter')
+    return tipsParams('capitalizedFirstLetter', 'params')
   }
   if (!/^[a-zA-Z\s]+$/g.test(params)) {
-    return tipsParams('capitalizedFirstLetter')
+    return tipsParams('capitalizedFirstLetter', 'params')
   }
   return params.slice(0, 1).toUpperCase() + params.slice(1)
 }
@@ -45,11 +45,14 @@ function capitalizedFirstLetter(params) {
  * @return {String} 返回计算后的结果加上百分号，如33.33%
  */
 function percentNum(num, num2, type = 1) {
-  if (variableType(num) !== 'Number' || variableType(num2) !== 'Number') {
-    return tipsParams('percentNum')
+  if (variableType(num) !== 'Number') {
+    return tipsParams('percentNum', 'num')
+  }
+  if (variableType(num2) !== 'Number') {
+    return tipsParams('percentNum', 'num2')
   }
   if ([0, 1].indexOf(type) === -1) {
-    return tipsParams('percentNum')
+    return tipsParams('percentNum', 'type')
   }
   if (num === 0 || num2 === 0) {
     if (type == 0) {
@@ -72,7 +75,7 @@ function percentNum(num, num2, type = 1) {
  */
 function uniqueArray(arr) {
   if (variableType(arr) !== 'Array') {
-    return tipsParams('uniqueArray')
+    return tipsParams('uniqueArray', 'arr')
   }
   if (arr.length === 0) {
     return arr
@@ -91,13 +94,13 @@ function uniqueArray(arr) {
  */
 function uniqueComplexArray(arr, key, type = 1) {
   if (variableType(arr) !== 'Array') {
-    return tipsParams('uniqueComplexArray')
+    return tipsParams('uniqueComplexArray', 'arr')
   }
   if (variableType(key) !== 'String') {
-    return tipsParams('uniqueComplexArray')
+    return tipsParams('uniqueComplexArray', 'key')
   }
   if ([0, 1].indexOf(type) === -1) {
-    return tipsParams('uniqueComplexArray')
+    return tipsParams('uniqueComplexArray', 'type')
   }
   if (arr.length === 0) {
     return arr
@@ -132,10 +135,10 @@ function randomNums(params = {}) {
     variableType(min) !== 'Number' ||
     variableType(max) !== 'Number'
   ) {
-    return tipsParams('randomNums')
+    return tipsParams('randomNums', 'params')
   }
   if (length <= 0 || max <= min) {
-    return tipsParams('randomNums')
+    return tipsParams('randomNums', 'params')
   }
 
   if (max - min < length) {
@@ -159,7 +162,7 @@ function randomNums(params = {}) {
  */
 function getMinNMax(arr) {
   if (variableType(arr) !== 'Array') {
-    return tipsParams('getMinNMax')
+    return tipsParams('getMinNMax', 'arr')
   }
   if (arr.length === 0) {
     return
@@ -188,7 +191,7 @@ function getMinNMax(arr) {
  */
 function flatArray(arr) {
   if (variableType(arr) !== 'Array') {
-    return tipsParams('flatArray')
+    return tipsParams('flatArray', 'arr')
   }
   if (arr.length === 0) {
     return arr
@@ -367,7 +370,7 @@ function move() {
  */
 function numFormat(num) {
   if (variableType(num) !== 'Number') {
-    return tipsParams('numFormat')
+    return tipsParams('numFormat', 'num')
   }
   const res = num
     .toString()
@@ -383,7 +386,7 @@ function numFormat(num) {
  */
 function isEmptyObject(obj) {
   if (variableType(obj) !== 'Object') {
-    return tipsParams('isEmptyObject')
+    return tipsParams('isEmptyObject', 'obj')
   }
   return Object.keys(obj).length === 0
 }

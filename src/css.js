@@ -172,7 +172,7 @@ function stringColor2RGB(val) {
   if (isStringColorVal(val)) {
     return HEX2RGB(stringColorVal[val])
   }
-  return tipsParams('RGB2HEX')
+  return tipsParams('stringColor2RGB', 'val')
 }
 
 /**
@@ -186,7 +186,7 @@ function stringColor2HEX(val) {
   if (isStringColorVal(val)) {
     return stringColorVal[val]
   }
-  return tipsParams('RGB2HEX')
+  return tipsParams('stringColor2HEX', 'val')
 }
 
 /**
@@ -251,7 +251,7 @@ function RGB2HEX(RGBVal) {
 
     return `#${colorVal}`
   }
-  return tipsParams('RGB2HEX')
+  return tipsParams('RGB2HEX', 'RGBVal')
 }
 
 /**
@@ -281,7 +281,7 @@ function HEX2RGB(HEXVal) {
     )},${Number.parseInt(bVal, 16)}`
     return `rgb(${colorVal})`
   }
-  return tipsParams('HEX2RGB')
+  return tipsParams('HEX2RGB', 'HEXVal')
 }
 
 /**
@@ -300,7 +300,7 @@ function shortHEXVal2LongHEXVal(HEXVal) {
   } else if (isLongHEXVal(HEXVal)) {
     return HEXVal
   }
-  return tipsParams('shortHEXVal2LongHEXVal')
+  return tipsParams('shortHEXVal2LongHEXVal', 'HEXVal')
 }
 
 /**
@@ -313,10 +313,13 @@ function shortHEXVal2LongHEXVal(HEXVal) {
 function eqRGBVal(val1, val2) {
   val1 = val1.trim()
   val2 = val2.trim()
-  if (isRGBVal(val1) && isRGBVal(val2)) {
-    return val1.replace(/ /g, '') == val2.replace(/ /g, '')
+  if (!isRGBVal(val1)) {
+    return tipsParams('eqRGBVal', 'val1')
   }
-  return tipsParams('eqRGBVal')
+  if (!isRGBVal(val2)) {
+    return tipsParams('eqRGBVal', 'val2')
+  }
+  return val1.replace(/ /g, '') == val2.replace(/ /g, '')
 }
 
 /**
@@ -329,13 +332,16 @@ function eqRGBVal(val1, val2) {
 function eqHEXVal(val1, val2) {
   val1 = val1.trim()
   val2 = val2.trim()
-  if (isHEXVal(val1) && isHEXVal(val2)) {
-    return (
-      shortHEXVal2LongHEXVal(val1).toUpperCase() ==
-      shortHEXVal2LongHEXVal(val2).toUpperCase()
-    )
+  if (!isHEXVal(val1)) {
+    return tipsParams('eqHEXVal', 'val1')
   }
-  return tipsParams('eqHEXVal')
+  if (!isHEXVal(val2)) {
+    return tipsParams('eqHEXVal', 'val2')
+  }
+  return (
+    shortHEXVal2LongHEXVal(val1).toUpperCase() ==
+      shortHEXVal2LongHEXVal(val2).toUpperCase()
+  )
 }
 
 /**
@@ -348,10 +354,13 @@ function eqHEXVal(val1, val2) {
 function eqStringColorVal(val1, val2) {
   val1 = val1.trim()
   val2 = val2.trim()
-  if (isStringColorVal(val1) && isStringColorVal(val2)) {
-    return val1.toLowerCase() == val2.toLowerCase()
+  if (!isStringColorVal(val1)) {
+    return tipsParams('eqStringColorVal', 'val1')
   }
-  return tipsParams('eqStringColorVal')
+  if (!isStringColorVal(val2)) {
+    return tipsParams('eqStringColorVal', 'val2')
+  }
+  return val1.toLowerCase() == val2.toLowerCase()
 }
 
 /**
@@ -373,7 +382,7 @@ function eqRGBNHEX(val1, val2) {
       shortHEXVal2LongHEXVal(val1).toUpperCase()
     )
   }
-  return tipsParams('eqRGBNHEX')
+  return tipsParams('eqRGBNHEX', 'val1|val2')
 }
 
 /**
@@ -399,7 +408,7 @@ function eqStringColorValNOther(val1, val2) {
       shortHEXVal2LongHEXVal(val1).toUpperCase()
     )
   }
-  return tipsParams('eqStringColorValNOther')
+  return tipsParams('eqColorVal', 'val1|val2')
 }
 
 /**
@@ -429,7 +438,7 @@ function eqColorVal(val1, val2) {
   ) {
     return eqStringColorValNOther(val1, val2)
   }
-  return tipsParams('eqColorVal')
+  return tipsParams('eqColorVal', 'val1|val2')
 }
 
 /**
@@ -484,7 +493,7 @@ function assignCssObj(base, obj) {
  */
 function getCSSStyle(dom) {
   if (!(dom instanceof window.HTMLElement)) {
-    return tipsParams('getCSSStyle')
+    return tipsParams('getCSSStyle', 'dom')
   }
 
   const temComputedStyle = window.getComputedStyle(dom)

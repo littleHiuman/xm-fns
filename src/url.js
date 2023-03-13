@@ -10,10 +10,10 @@ import xmJSUtils from './javascript'
  */
 function getUrlParam(key, url) {
   if (variableType(key) !== 'String') {
-    return tipsParams('getUrlParam')
+    return tipsParams('getUrlParam', 'key')
   }
   if (variableType(url) !== 'String') {
-    return tipsParams('getUrlParam')
+    return tipsParams('getUrlParam', 'url')
   }
   const urlObj = new URL(url || location.href)
   return urlObj.searchParams.get(key) || ''
@@ -28,10 +28,10 @@ function getUrlParam(key, url) {
  */
 function getUrlParams(keys, url) {
   if (variableType(keys) !== 'Array') {
-    return tipsParams('getUrlParams')
+    return tipsParams('getUrlParams', 'keys')
   }
   if (variableType(url) !== 'String') {
-    return tipsParams('getUrlParams')
+    return tipsParams('getUrlParams', 'url')
   }
   const obj = {}
   const keysArr = xmJSUtils.uniqueArray(keys)
@@ -51,13 +51,13 @@ function getUrlParams(keys, url) {
  */
 function setUrlParam(key, val, url) {
   if (variableType(key) !== 'String') {
-    return tipsParams('setUrlParam')
+    return tipsParams('setUrlParam', 'key')
   }
   if (variableType(val) !== 'String' || variableType(val) !== 'Number') {
-    return tipsParams('setUrlParam')
+    return tipsParams('setUrlParam', 'val')
   }
   if (variableType(url) !== 'String') {
-    return tipsParams('setUrlParam')
+    return tipsParams('setUrlParam', 'url')
   }
   const urlObj = new URL(url || location.href)
   urlObj.searchParams.set(key, val)
@@ -73,10 +73,10 @@ function setUrlParam(key, val, url) {
  */
 function setUrlParams(params, url) {
   if (variableType(params) !== 'Object') {
-    return tipsParams('setUrlParams')
+    return tipsParams('setUrlParams', 'params')
   }
   if (variableType(url) !== 'String') {
-    return tipsParams('setUrlParams')
+    return tipsParams('setUrlParams', 'url')
   }
   let afterUrl = url
   for (const key in params) {
@@ -97,10 +97,10 @@ function setUrlParams(params, url) {
  */
 function deleteUrlParam(key, url) {
   if (variableType(key) !== 'String') {
-    return tipsParams('deleteUrlParam')
+    return tipsParams('deleteUrlParam', 'key')
   }
   if (variableType(url) !== 'String') {
-    return tipsParams('deleteUrlParam')
+    return tipsParams('deleteUrlParam', 'url')
   }
   const urlObj = new URL(url || location.href)
   urlObj.searchParams.delete(key)
@@ -116,10 +116,10 @@ function deleteUrlParam(key, url) {
  */
 function deleteUrlParams(keys, url) {
   if (variableType(keys) !== 'Array') {
-    return tipsParams('deleteUrlParams')
+    return tipsParams('deleteUrlParams', 'keys')
   }
   if (variableType(url) !== 'String') {
-    return tipsParams('deleteUrlParams')
+    return tipsParams('deleteUrlParams', 'url')
   }
   const keysArr = xmJSUtils.uniqueArray(keys)
   let afterUrl = url

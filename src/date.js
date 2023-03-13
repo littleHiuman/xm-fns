@@ -11,10 +11,10 @@ function getWeekDate(startDay = -1, showToday = false) {
   // startDay -1代表今天开始，0代表周日开始
   // showToday 显示今日还是显示周几
   if ([-1, 0].indexOf(startDay) === -1) {
-    return tipsParams('getWeekDate')
+    return tipsParams('getWeekDate', 'startDay')
   }
   if (typeof showToday !== 'boolean') {
-    return tipsParams('getWeekDate')
+    return tipsParams('getWeekDate', 'showToday')
   }
 
   const dateObj = new Date()
@@ -69,11 +69,11 @@ export function getDateInfoNWeek(dd, day, showToday) {
  */
 function formatDate(dateObj, formatStr = 'YYYY-MM-DD') {
   if (!(dateObj instanceof Date)) {
-    return tipsParams('formatDate')
+    return tipsParams('formatDate', 'dateObj')
   }
   const formatInfo = checkFormatDateSign(formatStr)
   if (!formatInfo) {
-    return tipsParams('formatDate')
+    return tipsParams('formatDate', 'formatStr')
   }
   return concatFormatDate(dateObj, formatInfo)
 }
@@ -176,10 +176,10 @@ function concatFormatDate(dateObj, formatInfo) {
  */
 function fillZero(str, len) {
   if (variableType(str) !== 'String' && variableType(str) !== 'Number') {
-    return tipsParams('fillZero')
+    return tipsParams('fillZero', 'str')
   }
   if (variableType(len) !== 'Number') {
-    return tipsParams('fillZero')
+    return tipsParams('fillZero', 'len')
   }
   return fillStr(str, len, 0)
 }
@@ -194,13 +194,13 @@ function fillZero(str, len) {
  */
 function fillStr(str, len, fill) {
   if (variableType(str) !== 'String' && variableType(str) !== 'Number') {
-    return tipsParams('fillStr')
+    return tipsParams('fillStr', 'str')
   }
   if (variableType(len) !== 'Number') {
-    return tipsParams('fillStr')
+    return tipsParams('fillStr', 'len')
   }
   if (variableType(fill) !== 'String' && variableType(fill) !== 'Number') {
-    return tipsParams('fillStr')
+    return tipsParams('fillStr', 'fill')
   }
   str = `${str}`
   const strLen = str.length
@@ -221,18 +221,21 @@ function fillStr(str, len, fill) {
  * @return {Array} 结果
  */
 function getDays(weekday, num, startDay, lastResult) {
-  if ([0, 1, 2, 3, 4, 5, 6].indexOf(weekday) === -1 || num <= 0) {
-    return tipsParams('getDays')
+  if ([0, 1, 2, 3, 4, 5, 6].indexOf(weekday) === -1) {
+    return tipsParams('getDays', 'weekday')
+  }
+  if (num <= 0) {
+    return tipsParams('getDays', 'num')
   }
   const todayDate = new Date()
   if (startDay) {
     if (variableType(startDay) !== 'Number' || startDay < todayDate.getTime()) {
-      return tipsParams('getDays')
+      return tipsParams('getDays', 'startDay')
     }
   }
   if (lastResult) {
     if (variableType(lastResult) !== 'Array') {
-      return tipsParams('getDays')
+      return tipsParams('getDays', 'lastResult')
     }
   }
 
@@ -264,12 +267,12 @@ function getDays(weekday, num, startDay, lastResult) {
  */
 function getTimeDiffFormat(time) {
   if (variableType(time) !== 'Number') {
-    return tipsParams('getTimeDiffFormat')
+    return tipsParams('getTimeDiffFormat', 'time')
   }
   const calcTime = time
   const now = new Date().getTime()
   if (now < calcTime) {
-    return tipsParams('getTimeDiffFormat')
+    return tipsParams('getTimeDiffFormat', 'time')
   }
   const between = now - calcTime
   const second = 1000 // 秒
@@ -307,12 +310,16 @@ function getTimeDiffFormat(time) {
  * @param {String|Number|Date} customDate 自定义日期，默认是new Date()，字符串如：2022-1，数值如：new Date('2022-1').getTime()，Date如：new Date('2022-1')
  * @return {Array} {date:Number,weekday:Number}格式的数据；date对应这个月几号，weekday对应周几，0-6
  */
-function getMonthDay(isFillBlank = false, isFirstDayMonday = false, customDate=new Date()) {
+function getMonthDay(
+  isFillBlank = false,
+  isFirstDayMonday = false,
+  customDate = new Date()
+) {
   if (variableType(isFillBlank) !== 'Boolean') {
-    return tipsParams('getMonthDay')
+    return tipsParams('getMonthDay', 'isFillBlank')
   }
   if (variableType(isFirstDayMonday) !== 'Boolean') {
-    return tipsParams('getMonthDay')
+    return tipsParams('getMonthDay', 'isFirstDayMonday')
   }
 
   let dateObj
@@ -321,7 +328,7 @@ function getMonthDay(isFillBlank = false, isFirstDayMonday = false, customDate=n
       // 字符串
       const res = customDate.split(/[^\d]/g)
       if (res.length !== 2) {
-        return tipsParams('getMonthDay')
+        return tipsParams('getMonthDay', 'customDate')
       }
       dateObj = new Date(res.join('-'))
     } else if (variableType(customDate) === 'Number') {
@@ -331,15 +338,11 @@ function getMonthDay(isFillBlank = false, isFirstDayMonday = false, customDate=n
       // Date对象
       dateObj = customDate
     } else {
-      return tipsParams('getMonthDay')
+      return tipsParams('getMonthDay', 'customDate')
     }
   }
-  const firstDay = `${dateObj.getFullYear()}-${
-    dateObj.getMonth() + 1
-  }-1`
-  const lastDay = `${dateObj.getFullYear()}-${
-    dateObj.getMonth() + 2
-  }-1`
+  const firstDay = `${dateObj.getFullYear()}-${dateObj.getMonth() + 1}-1`
+  const lastDay = `${dateObj.getFullYear()}-${dateObj.getMonth() + 2}-1`
   const firstDayDateObj = new Date(firstDay)
   const lastDayDateObj = new Date(
     new Date(lastDay).getTime() - 24 * 60 * 60 * 1000
