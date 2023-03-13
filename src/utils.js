@@ -31,7 +31,7 @@ export function tipsUnknown(functionName) {
  * @param {String} param
  * @return {Void}
  */
-export function tipsParams(functionName, param) {
+export function tipsParams(functionName, param = '') {
   checkFunctionName(functionName)
   if (variableType(param) !== 'String') {
     throw new Error(`tipsParams: 参数param有误`)

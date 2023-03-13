@@ -171,7 +171,7 @@ function concatFormatDate(dateObj, formatInfo) {
  * @name: fillZero
  * @description: 给数值或字符串补充0以满足长度
  * @param {Number | String} str 数值或字符串
- * @param {String} len 长度
+ * @param {Number} len 长度
  * @return {String}
  */
 function fillZero(str, len) {
@@ -217,7 +217,7 @@ function fillStr(str, len, fill) {
  * @param {Number} weekday 周几（0-6）
  * @param {Number} num 个数（大于0）
  * @param {Number} startDay 开始时间（大于此刻）（可选参数）
- * @param {Object} lastResult 之前的结果（可选参数）
+ * @param {Array} lastResult 之前的结果（可选参数）
  * @return {Array} 结果
  */
 function getDays(weekday, num, startDay, lastResult) {

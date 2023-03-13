@@ -263,7 +263,7 @@
 #### 给数值或字符串补充0以满足长度
 #### 参数：
 		str，类型：Number | String，描述：数值或字符串
-		len，类型：String，描述：长度
+		len，类型：Number，描述：长度
 
 #### 返回值：
 		类型：String
@@ -286,7 +286,7 @@
 		weekday，类型：Number，描述：周几（0-6）
 		num，类型：Number，描述：个数（大于0）
 		startDay，类型：Number，描述：开始时间（大于此刻）（可选参数）
-		lastResult，类型：Object，描述：之前的结果（可选参数）
+		lastResult，类型：Array，描述：之前的结果（可选参数）
 
 #### 返回值：
 		类型：Array，描述：结果
