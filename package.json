@@ -1,6 +1,6 @@
 {
   "name": "xm-fns",
-  "version": "1.0.8",
+  "version": "1.0.9",
   "description": "一个前端的常用方法的工具库，包含CSS的、JavaScript的…… A front-end tool library for common methods, includes CSS, JavaScript ...",
   "main": "dist/main.js",
   "scripts": {
