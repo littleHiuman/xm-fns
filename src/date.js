@@ -3,14 +3,14 @@ import { tipsParams, variableType } from './utils'
 /**
  * @name: getWeekDate
  * @description: 获取本周的日期和周几
- * @param {Number} startDay 开始时间
+ * @param {Number} startDay 开始时间（-1代表今天开始，0代表周日开始，1代表周一开始）
  * @param {Boolean} showToday 显示今日还是显示周几，true显示今日
  * @return {Array}
  */
 function getWeekDate(startDay = -1, showToday = false) {
   // startDay -1代表今天开始，0代表周日开始
   // showToday 显示今日还是显示周几
-  if ([-1, 0].indexOf(startDay) === -1) {
+  if ([-1, 0, 1].indexOf(startDay) === -1) {
     return tipsParams('getWeekDate', 'startDay')
   }
   if (typeof showToday !== 'boolean') {
@@ -23,15 +23,21 @@ function getWeekDate(startDay = -1, showToday = false) {
   let i
   let start
   const result = []
-  if ((startDay === 0 && day === 0) || startDay === -1) {
+  if (startDay === day || startDay === -1) {
     start = 0
   } else if (startDay == 0 && day !== 0) {
     start = -day
+  } else if (startDay == 1 && day != 1) {
+    if (day < startDay) {
+      start = -6
+    } else {
+      start = -day + 1
+    }
   }
   for (i = start; i <= 6 + start; i++) {
     const dateObjTem = new Date()
     dateObjTem.setDate(date + i)
-    result.push(getDateInfoNWeek(dateObjTem, day, showToday))
+    result.push(getDateInfoNWeek(dateObjTem, showToday))
   }
   return result
 }
@@ -40,10 +46,10 @@ function getWeekDate(startDay = -1, showToday = false) {
  * @description: 得到某天的日期和周几
  * @param {Date} dd 日期对象
  * @param {Number} day 今天是周几 0-6
- * @param {Boolean} showToday 显示今日还是显示周几
+ * @param {Boolean} showToday 显示今日还是显示周几，默认显示周x
  * @return {Object} 包含date和week属性的对象
  */
-export function getDateInfoNWeek(dd, day, showToday) {
+export function getDateInfoNWeek(dd, showToday = false) {
   let m = dd.getMonth() + 1 //获取当前月份
   m = m < 10 ? `0${m}` : m
   let d = dd.getDate() //获取当前月份的日期
@@ -51,8 +57,15 @@ export function getDateInfoNWeek(dd, day, showToday) {
   const w = dd.getDay() //获取星期几
   const weekStr = ['周日', '周一', '周二', '周三', '周四', '周五', '周六']
   let week = weekStr[w]
-  if (showToday && day === w) {
-    week = '今日'
+  const currentDate = new Date()
+  if (
+    dd.getFullYear() == currentDate.getFullYear() &&
+    dd.getMonth() == currentDate.getMonth() &&
+    dd.getDate() == currentDate.getDate()
+  ) {
+    if (showToday) {
+      week = '今日'
+    }
   }
   return {
     date: `${m}/${d}`,
@@ -373,7 +386,6 @@ function getMonthDay(
 
 export default {
   getWeekDate,
-  getDateInfoNWeek,
   formatDate,
   fillZero,
   fillStr,

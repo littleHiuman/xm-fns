@@ -24,14 +24,17 @@ declare module 'xm-fns' {
     date?: string
     week?: string
   }
+  interface MonthDayType {
+    date?: number
+    week?: number
+  }
   declare function getWeekDate(startDay?: number = -1, showToday?: boolean = false): Array<WeekdayType>;
-  declare function getDateInfoNWeek(dd: Date, day: number, showToday: boolean): Object<WeekdayType>;
   declare function formatDate(dateObj: Date, formatStr?: string = 'YYYY-MM-DD'): string;
   declare function fillZero(str: number|string, len: number): string;
   declare function fillStr(str: number|string, len: number, fill: number|string): string;
   declare function getDays(weekday: number, num: number, startDay?: number, lastResult?: Array<any>): Array<any>;
   declare function getTimeDiffFormat(time: number): string;
-  declare function getMonthDay(isFillBlank?: boolean = false, isFirstDayMonday?: boolean = false, customDate?: Date = new Date()): Array<WeekdayType>;
+  declare function getMonthDay(isFillBlank?: boolean = false, isFirstDayMonday?: boolean = false, customDate?: Date = new Date()): Array<MonthDayType>;
 
   /**javascript */
   declare function filterNumberKeys(obj: Object<any>): Object<any>;
