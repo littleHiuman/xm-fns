@@ -25,15 +25,13 @@
 
 [eqColorVal（比较两个颜色值是否是同一个颜色）](#eqcolorval)
 
-[assignCssObj（合并两个css样式对象）](#assigncssobj)
+[assignCssObj（合并两个CSS样式对象）](#assigncssobj)
 
-[getCSSStyle（获取dom元素的css的值）](#getcssstyle)
+[getCSSStyle（获取DOM元素的CSS的值）](#getcssstyle)
 
 ## date
 
 [getWeekDate（获取本周的日期和周几）](#getweekdate)
-
-[getDateInfoNWeek（得到某天的日期和周几）](#getdateinfonweek)
 
 [formatDate（格式化日期）](#formatdate)
 
@@ -46,6 +44,8 @@
 [getTimeDiffFormat（时间处理方法(显示几天前、几小时前、几分钟前……)）](#gettimediffformat)
 
 [getMonthDay（获取这个月的所有天数与星期）](#getmonthday)
+
+[getDateInfoNWeek（得到某天的日期和周几）](#getdateinfonweek)
 
 ## javascript
 
@@ -78,6 +78,10 @@
 [numFormat（数值增加千位符（,））](#numformat)
 
 [isEmptyObject（判断是否是空对象）](#isemptyobject)
+
+[getTopValue（获取DOM元素距离页面顶部的距离）](#gettopvalue)
+
+[calcAutoIncreaseElms（数值过渡递增效果（可包含字符串），innerText为初始值，data-value为最终值，如：<div id="totalVolume" data-value="£750M">£0M</div>）](#calcautoincreaseelms)
 
 ## url
 
@@ -209,7 +213,7 @@
 
 ---
 ### assignCssObj
-#### 合并两个css样式对象
+#### 合并两个CSS样式对象
 #### 参数：
 		base，类型：Object，描述：原对象
 		obj，类型：Object，描述：要处理的对象
@@ -219,34 +223,23 @@
 
 ---
 ### getCSSStyle
-#### 获取dom元素的css的值
+#### 获取DOM元素的CSS的值
 #### 参数：
-		dom，类型：*，描述：dom元素
+		DOM，类型：*，描述：DOM元素
 
 #### 返回值：
-		类型：Object，描述：dom元素的css的值
+		类型：Object，描述：DOM元素的CSS的值
 
 ---
 ## date
 ### getWeekDate
 #### 获取本周的日期和周几
 #### 参数：
-		startDay，类型：Number，描述：开始时间
+		startDay，类型：Number，描述：开始时间（-1代表今天开始，0代表周日开始，1代表周一开始）
 		showToday，类型：Boolean，描述：显示今日还是显示周几，true显示今日
 
 #### 返回值：
 		类型：Array
-
----
-### getDateInfoNWeek
-#### 得到某天的日期和周几
-#### 参数：
-		dd，类型：Date，描述：日期对象
-		day，类型：Number，描述：今天是周几
-		showToday，类型：Boolean，描述：显示今日还是显示周几
-
-#### 返回值：
-		类型：Object，描述：包含date和week属性的对象
 
 ---
 ### formatDate
@@ -310,6 +303,17 @@
 
 #### 返回值：
 		类型：Array，描述：{date:Number,weekday:Number}格式的数据；date对应这个月几号，weekday对应周几，0-6
+
+---
+### getDateInfoNWeek
+#### 得到某天的日期和周几
+#### 参数：
+		dd，类型：Date，描述：日期对象
+		day，类型：Number，描述：今天是周几
+		showToday，类型：Boolean，描述：显示今日还是显示周几，默认显示周x
+
+#### 返回值：
+		类型：Object，描述：包含date和week属性的对象
 
 ---
 ## javascript
@@ -455,6 +459,24 @@
 
 #### 返回值：
 		类型：Boolean
+
+---
+### getTopValue
+#### 获取DOM元素距离页面顶部的距离
+#### 参数：
+		DOM，类型：*，描述：DOM元素
+
+#### 返回值：
+		类型：Number
+
+---
+### calcAutoIncreaseElms
+#### 数值过渡递增效果（可包含字符串），innerText为初始值，data-value为最终值，如：<div id="totalVolume" data-value="£750M">£0M</div>
+#### 参数：
+		DOM，类型：*，描述：DOM元素（数组）
+
+#### 返回值：
+		类型：void
 
 ---
 ## url

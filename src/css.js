@@ -443,7 +443,7 @@ function eqColorVal(val1, val2) {
 
 /**
  * @name: assignCssObj
- * @description: 合并两个css样式对象
+ * @description: 合并两个CSS样式对象
  * @param {Object} base 原对象
  * @param {Object} obj 要处理的对象
  * @return {Object} 合并后的结果
@@ -487,13 +487,13 @@ function assignCssObj(base, obj) {
 
 /**
  * @name: getCSSStyle
- * @description: 获取dom元素的css的值
- * @param {*} dom dom元素
- * @return {Object} dom元素的css的值
+ * @description: 获取DOM元素的CSS的值
+ * @param {*} DOM DOM元素
+ * @return {Object} DOM元素的CSS的值
  */
 function getCSSStyle(dom) {
   if (!(dom instanceof window.HTMLElement)) {
-    return tipsParams('getCSSStyle', 'dom')
+    return tipsParams('getCSSStyle', 'DOM')
   }
 
   const temComputedStyle = window.getComputedStyle(dom)

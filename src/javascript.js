@@ -391,6 +391,132 @@ function isEmptyObject(obj) {
   return Object.keys(obj).length === 0
 }
 
+/**
+ * @name: getTopValue
+ * @description: 获取DOM元素距离页面顶部的距离
+ * @param {*} DOM DOM元素
+ * @return {Number}
+ */
+function getTopValue(elm) {
+  return elm.getBoundingClientRect().top + document.documentElement.scrollTop
+}
+
+let times = 8
+/**
+ * @name: calcAutoIncreaseElms
+ * @description: 数值过渡递增效果（可包含字符串），innerText为初始值，data-value为最终值，如：<div id="totalVolume" data-value="£750M">£0M</div>
+ * @param {*} DOM DOM元素（数组）
+ * @return {void}
+ */
+function calcAutoIncreaseElms(elms) {
+  elms.reverse()
+  const heights = []
+  for (const elm of elms) {
+    const top =
+      elm.getBoundingClientRect().top + document.documentElement.scrollTop
+    const lastElm = heights[heights.length - 1]
+    if (lastElm) {
+      const lastTop = lastElm.top
+      if (Math.abs(top - lastTop) > 200) {
+        heights.push({
+          top,
+          fns: [
+            function(elm) {
+              calcAutoIncrease(elm)
+            }
+          ],
+          elms: [elm],
+          status: false
+        })
+      } else {
+        function temFn(elm) {
+          calcAutoIncrease(elm)
+        }
+        lastElm.fns.push(temFn)
+        lastElm.elms.push(elm)
+      }
+    } else {
+      heights.push({
+        top,
+        fns: [
+          function(elm) {
+            calcAutoIncrease(elm)
+          }
+        ],
+        elms: [elm],
+        status: false
+      })
+    }
+    // calcAutoIncrease(elm)
+  }
+  function startFn() {
+    const clientHeight = document.documentElement.clientHeight
+    const bodyTop = document.documentElement.scrollTop + clientHeight * 0.95
+    for (const elm of heights) {
+      if (!elm.status && bodyTop >= elm.top) {
+        for (let i = 0; i < elm.fns.length; i++) {
+          const fn = elm.fns[i]
+          fn(elm.elms[i])
+        }
+        elm.status = true
+      }
+    }
+  }
+  startFn()
+  window.addEventListener('scroll', startFn)
+}
+
+function calcAutoIncrease(el) {
+  let targetVal = el.getAttribute('data-value')
+  if (targetVal) {
+    let nowVal = el.innerText
+    const res = targetVal.match(/\d+/g)
+    let toNumber
+    let nowNumber
+    let other
+    let increase
+    if (res && res.length) {
+      toNumber = res[0]
+      const startIndex = targetVal.indexOf(toNumber)
+      let otherStart = ''
+      if (startIndex != 0) {
+        otherStart = targetVal.slice(0, startIndex)
+        targetVal = targetVal.slice(startIndex)
+        nowVal = nowVal.slice(startIndex)
+      }
+      other = targetVal.replace(toNumber, '')
+      nowNumber = nowVal.replace(other, '')
+      const between = toNumber - nowNumber
+      increase = parseInt(between / times)
+      if (between <= 8) {
+        increase = 1
+        times = between
+      }
+      increaseCb(el, increase, toNumber, nowNumber, other, otherStart, times)
+    }
+  }
+}
+
+function increaseCb(el, increase, toNumber, nowVal, other, otherStart, times) {
+  const timeoutTime = 1 * 1000
+  setTimeout(() => {
+    if (nowVal - 0 + increase < toNumber - 0) {
+      el.innerText = otherStart + (nowVal - 0 + increase) + other
+      increaseCb(
+        el,
+        increase,
+        toNumber,
+        nowVal - 0 + increase,
+        other,
+        otherStart,
+        times
+      )
+    } else {
+      el.innerText = otherStart + toNumber + other
+    }
+  }, timeoutTime / times)
+}
+
 export default {
   filterNumberKeys,
   capitalizedFirstLetter,
@@ -406,5 +532,7 @@ export default {
   stop,
   move,
   numFormat,
-  isEmptyObject
+  isEmptyObject,
+  getTopValue,
+  calcAutoIncreaseElms
 }

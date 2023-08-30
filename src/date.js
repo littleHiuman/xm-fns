@@ -391,5 +391,6 @@ export default {
   fillStr,
   getDays,
   getTimeDiffFormat,
-  getMonthDay
+  getMonthDay,
+  getDateInfoNWeek
 }

@@ -27,3 +27,5 @@ export declare function stop(): void;
 export declare function move(): void;
 export declare function numFormat(num: number): string;
 export declare function isEmptyObject(obj: Object<any>): boolean;
+export declare function getTopValue(elm: any): number;
+export declare function calcAutoIncreaseElms(elms: Array<any>): void;
